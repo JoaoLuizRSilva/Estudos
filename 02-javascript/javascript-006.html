@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Vota ou Não Vota</h1>
+    <input type="number" name="idade" id="idade">
+    <input type="button" value="Descobrir" id="descobrir">
+    <div id="msg">
+
+    </div>
+    <script>
+        let descobrir = document.querySelector('#descobrir');
+        let mensagem = document.querySelector('#msg')
+        descobrir.addEventListener('click', idadeParaVotar);
+        function idadeParaVotar(){
+            let idade = Number((document.getElementById('idade')).value);
+            if (idade < 16) {
+                mensagem.innerHTML = '<p>Ainda não vota</p>';
+            } else if (idade < 18 || idade > 65) {
+                mensagem.innerHTML = '<p>Voto não obrigatório</p>';
+            } else {
+                mensagem.innerHTML = '</p>Voto obrigatório</p>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Condição simples</h1>
+    <input type="number" name="velocidade" id="velocidade">
+    <input type="button" value="capturar" id="capturar">
+    <div id="msg">
+
+    </div>
+    <script>
+        // var vel = 78.9
+        // console.log(`A velocidade do seu carro é de ${vel}Km/h`);
+        // if (vel >= 60){ //Condição simples
+        //     console.log(`Multado!`);
+        // }
+        // console.log(`Dirija sempre usando cinto de seguraça!`);
+        let buttonCapturar = document.getElementById('capturar');
+        let localDeMensagem = document.getElementById('msg');
+        function capturar(){
+            let elementoVelocidade = document.getElementById('velocidade');
+            let velocidade = Number(elementoVelocidade.value);
+            localDeMensagem.innerHTML = `<p>Sua velocidade é de ${velocidade}km/h</p>`
+            if (velocidade >= 60){
+                localDeMensagem.innerHTML += 'Multado!';
+            }
+        }
+        buttonCapturar.addEventListener('click', capturar);
+    </script>
+</body>
+</html>

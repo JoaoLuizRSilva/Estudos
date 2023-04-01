@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .azul{
+            background-color: blue;
+            width: 550px;
+        }
+        .div-dentro{
+            background-color: rebeccapurple;
+            width: 400px;
+        }
+        span{
+            background-color: greenyellow;
+            width: 200px;
+            display: inline-block;
+        }
+        #i1{
+            visibility: hidden;
+        }
+        #i2{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Display</h1>
+    <!-- Uma div -->
+    <div class="azul">
+        <div>Esta é uma DIV normal</div>
+        <div>E aqui a história<div class="div-dentro">DIV de dentro</div> continua</div>
+    </div>
+    <!-- Parágrafo -->
+    <p>
+        Aqui eu tenho o inicio de um parágrafo <span>um SPAN no meio</span> E o fim do parágrafo.
+    </p>
+    <!-- Outro parágrafo -->
+    <p>
+        Aqui eu tenho o inicio de um parágrafo <div> uma div no meio</div> E o fim do parágrafo.
+    </p>
+    <!-- Imagem -->
+    <h2>Imagem escondida</h2>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod <img src="./img/lambo-branca.png" alt="" id="i1"> libero facere dolores cumque eos harum atque accusamus sint, ipsum unde odit repellat dolor molestias illum eveniet odio, ipsam, suscipit obcaecati.</p>
+    <h2>Imagem nunca foi colocada aqui</h2>
+    <p>Aqui o inicio do parágrafo <img src="./img/cpm-braxis.jpg" alt="" id="i2"> E o fim dele</p>
+</body>
+</html>

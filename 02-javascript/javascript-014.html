@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <input type="number" name="n1" id="n1">
+    <input type="number" name="n2" id="n2">
+    <input type="button" value="media" id="media">
+    <div id="div">
+        Clique para ver o resultado...
+    </div>
+</head>
+<body>
+    <script>
+        let botao = document.querySelector('#media');
+        let div = document.querySelector('#div');
+        botao.addEventListener('click', mostrar);
+        function mostrar(){
+            let n01 = document.querySelector('#n1');
+            let n02 = document.querySelector('#n2');
+            let valorN01 = Number(n01.value);
+            let valorN02 = Number(n02.value);
+            let valorMedia = media(valorN01, valorN02);
+            div.innerHTML = valorMedia;
+        }
+
+        function media(n1=0, n2=0){
+            return (n1 + n2) / 2;
+        }
+    </script>
+</body>
+</html>

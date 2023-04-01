@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Condição Composta</h1>
+    <p id="resultado"></p>
+    <script>
+        let pais = "EUA";
+        console.log(`Vivendo em ${pais}`);
+        if(pais == "BR"){
+            document.getElementById("resultado").textContent = 'Brasileiro';
+        } else{
+            document.getElementById("resultado").textContent = 'Estrangeiro';
+        }
+    </script>
+</body>
+</html>

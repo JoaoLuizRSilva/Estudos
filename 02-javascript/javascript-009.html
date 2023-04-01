@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-color: #3b88b4;
+        }
+        header{
+            color: white;
+            text-align: center;
+        }
+        section{
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.281);
+        }
+        footer{
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+        #imagem{
+            border-radius: 50%;
+            width: 500px;
+            height: 500px;
+        }
+        div{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Verificador de idade</h1>
+    </header>
+    <section>
+        <div>
+            <p>
+                Ano de nascimento:
+                <input type="number" name="nascimento" id="nascimento">
+            </p>
+            <p>
+                Sexo:
+                <input type="radio" name="inputSex" id="masc" checked>
+                <label for="masc">Masculino</label>
+                <input type="radio" name="inputSex" id="fem">
+                <label for="fem">Feminino</label>
+            </p>
+            <input type="button" value="Verificar" id="ver">
+        </div>
+        <div id="resultado">
+            <p>Preencha os campos para ver o resultado</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; CursoEmVideo</p>
+    </footer>
+    <script>
+        let botao = document.querySelector('#ver');
+        let resultado = document.querySelector('#resultado');
+        botao.addEventListener('click', verificar);
+
+        function carregarImagem(idade, genero){
+            let imagem = document.createElement('img');
+            if(idade<=12){
+                imagem.setAttribute('src', `./img/crianca-${genero}.jpg`);
+            } else if(idade<=21){
+                imagem.setAttribute('src', `./img/jovem-${genero}.jpg`);
+            } else if(idade<=60){
+                imagem.setAttribute('src', `./img/adulto-${genero}.jpg`);
+            } else{
+                imagem.setAttribute('src', `./img/velho-${genero}.jpg`);
+            }
+            resultado.appendChild(imagem);
+        }
+
+        function verificar(){
+            let inputNascimento = document.querySelector('#nascimento');
+            let data = new Date();
+            let anoAtual = data.getFullYear();
+            if(inputNascimento.value.length==0 || inputNascimento.value>anoAtual){
+                alert('[Erro] Verifique os dados e tente novamente');
+                inputNascimento.value = '';
+                inputNascimento.focus();
+            } else{
+                let idade = anoAtual - inputNascimento.value;
+                let campoGenero = document.getElementsByName('inputSex');
+                let genero = '';
+                if(campoGenero[0].checked){
+                    genero = 'homem';
+                } else{
+                    genero = 'mulher';
+                }
+                resultado.innerHTML = `<p>${genero.toUpperCase()} com ${idade} anos de idade.</p>`;
+                carregarImagem(idade, genero);
+            }
+        }
+    </script>
+</body>
+</html>
