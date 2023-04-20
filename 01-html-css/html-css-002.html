@@ -4,20 +4,123 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="./img/ico.png" type="image/png">
+    <title>Workshop</title>
+    <style>
+        *{
+            padding: 0px;
+            border: 0px;
+            margin: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-color: black;
+        }
+        .container{
+            max-width: 1000px;
+            margin: auto;
+        }
+        header{
+            background-color: #48c5ce;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .title{
+            font-size: 26px;
+        }
+        section{
+            padding: 20px;
+            background-image: url('./img/people.jpg');
+            background-size: cover;
+            overflow: hidden;
+        }
+        .fromContainer{
+            max-width: 300px;
+            background-color: #ffffffbb;
+            padding: 30px;
+            float: right;
+            border-radius: 20px 0px;
+        }
+        h2{
+            font-size: 24px;
+        }
+        .mb{
+            margin-bottom: 15px;
+        }
+        input, select{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border: none;
+            margin-bottom: 10px;
+        }
+        input[type="submit"]{
+            background-color: #48c5ce;
+            color: white;
+            font-weight: bold;
+        }
+        select{
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+
+            background-image: url('./img/arrow.jpg');
+            background-repeat: no-repeat;
+
+            background-position-x: calc(100% - 10px);
+            background-position-y: center;
+        }
+        footer{
+            background-color: #202121;
+            padding: 40px;
+            text-align: center;
+        }
+        .picture{
+            width: 160px;
+        }
+        .description{
+            color: white;
+            display: inline-block;
+            max-width: 40%;
+            margin-left: 40px;
+            text-align: left;
+        }
+        .description h2, .description p{
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Formulário</h1>
-    <h2>cadastro</h2>
-    <form method="post" action="/cadastro">
-        <input type="text" name="nome">
-        <input type="text" name="email">
-        <input type="submit">
-    </form>
-    <h2>Youtube</h2>
-    <form method="get" action="https://www.youtube.com/results">
-        <input type="text" name="search_query">
-        <input type="submit">
-    </form>
+    <div class="container">
+        <header>
+            <h1 class="title">Participe do Workshop que vai mudar seu negócio</h1>
+        </header>
+        <section>
+            <div class="fromContainer">
+                <h2 class="mb">GARANTA SEU LUGAR NO WORKSHOP DO MAIOR ESPECIALISTA EM MARKETING DA ATUALIDADE</h2>
+                <P class="mb">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat voluptatem eaque in velit nemo libero voluptates aliquam, cupiditate, eius itaque magnam similique dolores molestiae, assumenda quia! Animi ipsum temporibus necessitatibus.</P>
+                <form method="post" action="">
+                    <input id="name" name="name" type="text" placeholder="Seu Nome">
+                    <input id="email" name="email" type="text" placeholder="Email">
+                    <select name="place">
+                        <option value="rj">Rio de Janeiro</option>
+                        <option value="mg">Minas Gerais</option>
+                        <option value="es">Espírito Santo</option>
+                        <option value="sp">São Paulo</option>
+                    </select>
+                    <input type="submit" value="Increva-se">
+                </form>
+            </div>
+        </section>
+        <footer>
+            <img src="./img/face.jpg" alt="foto-palestrante" class="picture">
+            <div class="description">
+                <h2>O palestrante</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui cum aspernatur asperiores distinctio quia sapiente sit libero dicta eligendi illum omnis, ipsa minima quasi nulla eveniet ipsam cupiditate tenetur blanditiis!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quod quasi, voluptas in adipisci nostrum, facilis, autem eos porro dicta facere aut necessitatibus totam dolore. Quidem consequuntur veritatis quae voluptatum!</p>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

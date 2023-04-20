@@ -1,5 +1,4 @@
 string = 'O Brasil é o País do Futebool, o Brasil é Penta. luffy luffy luffy luffy'
-string = string
 lista = string.split(' ')
 lista_2 = string.split(',')
 

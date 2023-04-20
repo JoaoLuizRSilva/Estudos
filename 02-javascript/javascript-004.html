@@ -1,36 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Modelo de Site</title>
+    <style>
+        body{
+            background-color: #3b88b4;
+        }
+        header{
+            color: white;
+            text-align: center;
+        }
+        section{
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.281);
+        }
+        footer{
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+        #imagem{
+            border-radius: 50%;
+            width: 500px;
+            height: 500px;
+        }
+        div{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Condição simples</h1>
-    <input type="number" name="velocidade" id="velocidade">
-    <input type="button" value="capturar" id="capturar">
-    <div id="msg">
+    <header>
+        <h1>Hora do dia</h1>
+    </header>
+    <section>
+        <div id="msg">
+            Aqui vai aparecer a mensagem...
+        </div>
+        <div>
+            <img src="" alt="foto que muda a cada horário" id="imagem">
+        </div>
+    </section>
+    <footer>
+        <p>&copy; CursoEmVideo</p>
+    </footer>
 
-    </div>
     <script>
-        // var vel = 78.9
-        // console.log(`A velocidade do seu carro é de ${vel}Km/h`);
-        // if (vel >= 60){ //Condição simples
-        //     console.log(`Multado!`);
-        // }
-        // console.log(`Dirija sempre usando cinto de seguraça!`);
-        let buttonCapturar = document.getElementById('capturar');
-        let localDeMensagem = document.getElementById('msg');
-        function capturar(){
-            let elementoVelocidade = document.getElementById('velocidade');
-            let velocidade = Number(elementoVelocidade.value);
-            localDeMensagem.innerHTML = `<p>Sua velocidade é de ${velocidade}km/h</p>`
-            if (velocidade >= 60){
-                localDeMensagem.innerHTML += 'Multado!';
+        function carregar(){
+            let msg = document.getElementById('msg');
+            let img = document.getElementById('imagem');
+            let data = new Date();
+            let hora = data.getHours();
+            // let hora = 10;
+            msg.innerHTML = `Agora são ${hora} horas`;
+
+            if (hora>=0 && hora<= 12) {
+                //BomDia
+                img.src = './img/morning.jpg';
+                document.body.style.background = '#e2cd9f';
+            } else if (hora <18 ) {
+                //Boa tarde
+                img.src = './img/afternoon.jpg';
+                document.body.style.background = '#b9846f';
+            } else {
+                //Boa noite
+                img.src = './img/night.jpg';
+                document.body.style.background = '#515154';
             }
         }
-        buttonCapturar.addEventListener('click', capturar);
+        window.onload(carregar());
     </script>
 </body>
 </html>

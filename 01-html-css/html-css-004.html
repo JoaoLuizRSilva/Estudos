@@ -1,22 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>Tabela com estilo</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			max-width: 600px;
+			margin: auto;
+		}
+		th, td {
+			border: 1px solid black;
+			padding: 10px;
+			text-align: center;
+		}
+		th {
+			background-color: #f2f2f2;
+		}
+	</style>
 </head>
 <body>
-    <form method="post" action="">
-        <input type="text"> <br>
-        <input type="password"> <br>
-        <input type="checkbox" name="curso" value="op1"> curso react js<br>
-        <input type="checkbox" name="curso" value="op2"> curso node js<br>
-        <input type="radio" name="gender" value="m" checked> masculino <br>
-        <input type="radio" name="gender" value="f"> feminino <br>
-        <input type="radio" name="gender2" value="o"> mergulhador <br>
-        <input type="reset" value="limpar">
-        <input type="submit" value="mandar">
-    </form>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Idade</th>
+				<th>Cidade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>João</td>
+				<td>30</td>
+				<td>São Paulo</td>
+			</tr>
+			<tr>
+				<td>Maria</td>
+				<td>25</td>
+				<td>Rio de Janeiro</td>
+			</tr>
+			<tr>
+				<td>Carlos</td>
+				<td>40</td>
+				<td>Belo Horizonte</td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>

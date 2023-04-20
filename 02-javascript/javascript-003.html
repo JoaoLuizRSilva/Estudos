@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,25 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Somando Valores</h1>
-    <input type="number" name="n1" id="n1">
-    <input type="number" name="n2" id="n2">
-    <input type="button" value="somar" id="botao">
-    <div id="resultado">
-        Resultado: 
-    </div>
+    <h1>switch</h1>
     <script>
-        let confirmar = document.getElementById('botao');
-        let resultado = document.querySelector('div#resultado');
-        function somar(){
-            let n1 = document.getElementById('n1');
-            let n2 = document.getElementById('n2');
-            let n01 = Number(n1.value);
-            let n02 = Number(n2.value);
-            let valorDaSoma = n01 + n02;
-            resultado.innerHTML += `A soma entre ${n01} e ${n02} é igual a ${valorDaSoma}`;
+        let agora = new Date();
+        let diaDaSemana = agora.getDay();
+        switch(diaDaSemana) {
+            case 0:
+                console.log('Domingo');
+                break;
+            case 1:
+                console.log('Segunda');
+                break;
+            case 2:
+                console.log('Terça');
+                break;
+            case 3:
+                console.log('Quarta');
+                break;
+            case 4:
+                console.log('Quinta');
+                break;
+            case 5:
+                console.log('Sexta');
+                break;
+            case 6:
+                console.log('Sábado');
+                break;
+            default:
+                console.log('[Erro] dia inválido');
         }
-        confirmar.addEventListener('click', somar);
     </script>
 </body>
 </html>

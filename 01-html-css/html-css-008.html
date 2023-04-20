@@ -6,17 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    html, body{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+    }
+    .barra-topo{
+        background-color: #ff6b28;
+        padding: 15px;
+        text-align: center;
+    }
+    #cabecalho{
+        background: url('./img/hero_bolo.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+    }
+    .conteudo{
+        max-width: 990px;
+        margin: auto;
+        padding: 0 40px;
+        margin-top: 100px;
+    }
+    h1, h2, h3, h4, h5, h6{
+        color: #ff6b28;
+    }
+    h1{
+        font-size: 48px;
+
+    }
+    .cartao{
+        padding: 70px 100px;
+        margin-top: 50px;
+        border-radius: 20px;
+    }
+    .cartao:hover{
+        box-shadow: 8px 8px 15px 12px rgba(205, 205, 205, 0.25);
+    }
+    .ingredientes{
+        cursor: url('./img/cursor_ingredientes.png'), default;
+    }
+    .preparo{
+        cursor: url('./img/cursor_preparo.png'), default;
+    }
+    .botao-comprar{
+        background-color: #ff6b28;
+        padding: 16px;
+        border-radius: 20px;
+    }
+    .text-white{
+        color: white;
+    }
+    a{
+        text-decoration: none;
+    }
+    li{
+        margin-bottom: 14px;
+    }
+    .lista-ingredientes{
+        margin-bottom: 50px;
+    }
+    p, li{
+        line-height: 28px;
+    }
+    .instrucoes{
+        cursor: url('./img/cursor_intrucoes.png'), default;
+    }
+    .rodape{
+        background-color: #ff6b28;
+        color: white;
+        padding: 15px;
+        text-align: center;
+    }
+    .rodape-texto{
+        max-width: 500px;
+        margin: auto;
+        font-size: 16px;
+        line-height: 24px;
+    }
+</style>
 <body>
-    <form method="get" action="">
-        <input type="color" name="cor"> <br>
-        <input type="date" name="data" max="2022-09-18"> <br>
-        <input type="datetime-local"> <br>
-        <input type="file" name="arquivo"> <br>
-        <input type="number" min="50" max="1000" name="numero"> <br>
-        <input type="range" min="5" max="10" name="intervalo"> <br>
-        telefone: <input type="tel" name="telenofe"> <br>
-        e-mail: <input type="email" name="email"> <br>
-        <input type="submit">
-    </form>
+    <div class="barra-topo">
+        <img src="./img/logo_tudogostoso.png" alt="logo">
+    </div>
+    <div id="cabecalho">
+
+    </div>
+    <div class="conteudo">
+        <h1>Bolo de fubá com goiabada</h1>
+        <div class="cartao ingredientes">
+            <h2>Ingredientes</h2>
+            <ul class="lista-ingredientes">
+                <li>1 ovo</li>
+                <li>1 copo (americano) de leite</li>
+                <li>1 copo (americano) de fubá</li>
+                <li>1 copo (americano) de açúcar</li>
+                <li>1/2 copo (americano) de óleo</li>
+                <li>1 copo (americano) farinha de trigo</li>
+                <li>1 colher de fermento em pó goiabada em pedaços erva-doce a gosto</li>
+            </ul>
+            <a href="#" class="botao-comprar text-white">Comprar Ingredientes</a>
+        </div>
+        <div class="cartao preparo">
+            <h2>Modo de preparo</h2>
+            <ol>
+                <li>Misture no liquidificador o ovo, o leite, o óleo, o açúcar, o fubá e bata bem.</li>
+                <li>Despeje a mistura em uma tigela, e misture com a farinha e o fermento em pó.</li>
+                <li>Despeje a massa em uma forma untada com manteiga e farinha, e acrescente uma camada de goiabada. Repita este processo até preencher toda a forma.</li>
+                <li>Leve ao forno médio (180° C), preaquecido, por 40 minutos.</li>
+            </ol>
+        </div>
+        <div class="cartao instrucoes">
+            <h2>Instruções adicionais</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem laborum minus labore corporis nihil laboriosam sed reiciendis voluptas ab repellat dolore veniam velit doloremque, quaerat totam delectus eum ad animi?</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem laborum minus labore corporis nihil laboriosam sed reiciendis voluptas ab repellat dolore veniam velit doloremque, quaerat totam delectus eum ad animi?</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem laborum minus labore corporis nihil laboriosam sed reiciendis voluptas ab repellat dolore veniam velit doloremque, quaerat totam delectus eum ad animi?</p>
+        </div>
+    </div>
+    <div class="rodape">
+        <p class="rodape-texto">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore eligendi cumque, reiciendis dolores in tempora libero, non est accusamus, aliquam provident vitae? Reiciendis eos impedit neque dolor eaque esse tenetur?
+            <a href="mailto:teste@teste.com" class="text-white">teste@teste.com</a>
+        </p>
+    </div>
 </body>
 </html>

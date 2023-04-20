@@ -1,30 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Modelo de Site</title>
+    <style>
+        body{
+            background-color: #3b88b4;
+        }
+        header{
+            color: white;
+            text-align: center;
+        }
+        section{
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.281);
+        }
+        footer{
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-    <h1>Vota ou Não Vota</h1>
-    <input type="number" name="idade" id="idade">
-    <input type="button" value="Descobrir" id="descobrir">
-    <div id="msg">
+    <header>
+        <h1>Super contador</h1>
+    </header>
+    <section>
+        <div id="dados">
+            <p>Inicio: <input type="number" name="inicio" id="inicio"></p>
+            <p>Fim: <input type="number" name="fim" id="fim"></p>
+            <p>Passo: <input type="number" name="passo" id="passo"></p>
+            <p><input type="button" value="Contar" id="botaoDeContar"></p>
+        </div>
+        <div>
+            <ul id="resultado">
 
-    </div>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; CursoEmVideo</p>
+    </footer>
+
+
+    <!--Aqui começa o JS-->
     <script>
-        let descobrir = document.querySelector('#descobrir');
-        let mensagem = document.querySelector('#msg')
-        descobrir.addEventListener('click', idadeParaVotar);
-        function idadeParaVotar(){
-            let idade = Number((document.getElementById('idade')).value);
-            if (idade < 16) {
-                mensagem.innerHTML = '<p>Ainda não vota</p>';
-            } else if (idade < 18 || idade > 65) {
-                mensagem.innerHTML = '<p>Voto não obrigatório</p>';
-            } else {
-                mensagem.innerHTML = '</p>Voto obrigatório</p>';
+        let botaoDeContar = document.querySelector('#botaoDeContar');
+        let resultado = document.querySelector('#resultado')
+        botaoDeContar.addEventListener('click', contador);
+        function contador(){
+            resultado.innerHTML = '';
+            let inicio = (document.querySelector('#inicio'));
+            let fim = (document.querySelector('#fim'));
+            let passo = document.querySelector('#passo');
+            if (inicio.value.legth == 0 || fim.value.length == 0 || passo.value.length == 0) {
+                alert('[Erro] faltam dados, por favor tente novamente!');
+            } else{
+                let valorInicio = Number(inicio.value);
+                let valorFim = Number(fim.value);
+                let valorPasso = Number(passo.value);
+                if (valorPasso <= 0) {
+                    alert('Passo inválido! Considerando PASSO 1');
+                    valorPasso = 1;
+                }
+                if (valorInicio < valorFim) {
+                    //Contagem crescente
+                    for(let contador = valorInicio; contador<=valorFim; contador += valorPasso) {
+                    resultado.innerHTML += `<li>${contador}</li>`;
+                    }
+                } else {
+                    //Contagem decrescente
+                    for (let contador = valorInicio; contador >=valorFim; contador -= valorPasso) {
+                        resultado.innerHTML += `<li>${contador}</li>`;
+                    }
+                }
             }
         }
     </script>
