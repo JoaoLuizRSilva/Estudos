@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Spaceship{
+            constructor(name, maxCrew, maxRecommendedVelocity){
+                this.name = name
+                this.maxCrew = maxCrew
+                this.maxRecommendedVelocity = maxRecommendedVelocity
+                this.currentVelocity = 0
+            }
+
+            speedUp(acceleration){
+                this.currentVelocity += acceleration
+                if(this.currentVelocity > this.maxRecommendedVelocity){
+                    alert("VELCIDADE MÁXIMA ULTRAPASSADA!!\nDiminua ou provocará danos à nave")
+                }
+            }
+        }
+
+        class BattleSpaceship extends Spaceship{
+            stop(){
+                this.currentVelocity = 0
+                alert("Recolhendo armas e parando nave de batalha")
+            }
+        }
+
+        class DiscoverySpaceship extends Spaceship{
+            stop(){
+                this.currentVelocity = 0
+                alert("Recolhendo equipamentos de amostras e parando nave de descoberta")
+            }
+        }
+
+        let darwin = new DiscoverySpaceship("Darwin", 10, 200)
+        let fenix = new BattleSpaceship("Fenix", 30, 240)
+
+        console.log(darwin)
+        console.log(fenix)
+
+        darwin.speedUp(190)
+        fenix.speedUp(200)
+
+        darwin.stop()
+        fenix.stop()
+    </script>
+</body>
+</html>

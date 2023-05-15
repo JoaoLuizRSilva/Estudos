@@ -1,73 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modelo de Site</title>
-    <style>
-        body{
-            background-color: #3b88b4;
-        }
-        header{
-            color: white;
-            text-align: center;
-        }
-        section{
-            background-color: white;
-            border-radius: 10px;
-            padding: 15px;
-            max-width: 700px;
-            margin: auto;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.281);
-        }
-        footer{
-            color: white;
-            text-align: center;
-            font-style: italic;
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <header>
-        <h1>Tabuada</h1>
-    </header>
-    <section>
-        <div>
-            <p>Número: <input type="number" name="num" id="num"></p>
-            <input type="button" value="Gerar Tabuada" id="botaoTabuada">
-        </div>
-        <div>
-            <select name="tabuada" id="tabuada" size="11">
-                <option>Digite um Número para ver a tabuada</option>
-            </select>
-        </div>
-    </section>
-    <footer>
-        <p>&copy; CursoEmVideo</p>
-    </footer>
-
-
-    <!--Aqui começa o JS-->
     <script>
-        let botaoTabuada = document.querySelector('#botaoTabuada');
-        botaoTabuada.addEventListener('click', gerarTabuada);
-        function gerarTabuada(){
-            let num = document.querySelector('#num');
-            let tab = document.querySelector('#tabuada');
-            if(num.value.length == 0) {
-                alert('Por favor digite um número');
-            } else {
-                let valorNum = Number(num.value);
-                tab.innerHTML = '';
-                for(let x = 0; x <= 10; x++){
-                    let item = document.createElement('option');
-                    item.text = `${valorNum} x ${x} =${valorNum*x}`;
-                    item.value = `tab${x}`;
-                    tab.appendChild(item);
-                }
-            }
+        let users = ["João", "Carlos", "Maria"]
+
+        function pushUser(name, callback){
+            setTimeout(()=>{
+                users.push(name)
+                callback()
+            }, 2000)
         }
+
+        function listUsers(){
+            console.log(users)
+        }
+
+        pushUser("Enygma", listUsers)
     </script>
 </body>
 </html>

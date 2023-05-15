@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class Spaceship {
+      constructor(name, maxCapacity, currentCharge){
+        this.name = name
+        this.maxCapacity = maxCapacity
+        this.currentCharge = currentCharge
+      }
+
+      currentPercentCharge(){
+        return this.currentCharge * 100 / this.maxCapacity
+      }
+    }
+
+    class SpaceshipController {
+      constructor(spaceship){
+        this.spaceship = spaceship
+      }
+
+      turnOn(){
+        this.checkCurrentCharge().then(currentCharge =>{
+          console.log(`(${this.spaceship.name}) Partida autorizada: carga atual em ${currentCharge}%`)
+        }).catch(currentCharge=>{
+          console.log(`(${this.spaceship.name}) Partida não autorizada: carga em apenas ${currentCharge}%`)
+        })
+      }
+
+      checkCurrentCharge(){
+        return new Promise((resolve, reject)=>{
+          let currentCharge = this.spaceship.currentPercentCharge()
+          if (currentCharge >= 30){
+            resolve(currentCharge)
+          }else{
+            reject(currentCharge)
+          }
+        })
+      }
+    }
+
+    const sophia = new Spaceship("Sophia", 10, 5)
+    const amsterda = new Spaceship("Amsterdã", 14, 10)
+    const dwarfStart = new Spaceship("Estrela-Anã", 20, 4)
+
+    const sophiaController = new SpaceshipController(sophia)
+    const amsterdaController = new SpaceshipController(amsterda)
+    const dwarfStartController = new SpaceshipController(dwarfStart)
+
+    sophiaController.turnOn()
+    amsterdaController.turnOn()
+    dwarfStartController.turnOn()
+  </script>
+</body>
+</html>

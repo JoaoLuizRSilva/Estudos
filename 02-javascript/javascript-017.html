@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const MAX_LUGARES = 19;
+
+        function mostraFileira(lugares) {
+            for (let i = 0; i < 10; i++) {
+                if (lugares[i] == null) {
+                    console.log(`[ B${i + 1 < 10 ? '0' : ''}${i + 1} ]`);
+                } else {
+                    console.log('[ --- ]');
+                }
+            }
+            console.log('------------------------------------------------------------------------');
+        }
+
+        let lugares = new Array(MAX_LUGARES).fill(null);
+        let cadeira, resposta;
+
+        do {
+            console.clear();
+            mostraFileira(lugares);
+            cadeira = prompt('Reservar a cadeira: B');
+            if (cadeira < 1 || cadeira > MAX_LUGARES) {
+                console.log('ERRO: Cadeira inválida!');
+            } else if (lugares[cadeira - 1] == null) {
+                lugares[cadeira - 1] = 'X';
+                console.log(`Cadeira B${cadeira < 10 ? '0' : ''}${cadeira} RESERVADA!`);
+            } else {
+                console.log('ERRO: Lugar Ocupado!');
+            }
+            resposta = prompt('Quer reservar outro? [S/N]').toUpperCase();
+        } while (resposta === 'S');
+    </script>
+</body>
+</html>

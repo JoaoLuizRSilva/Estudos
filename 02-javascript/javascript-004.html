@@ -1,81 +1,57 @@
+<!-- dist/index.html -->
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="en">
+  <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modelo de Site</title>
-    <style>
-        body{
-            background-color: #3b88b4;
-        }
-        header{
-            color: white;
-            text-align: center;
-        }
-        section{
-            background-color: white;
-            border-radius: 10px;
-            padding: 15px;
-            max-width: 700px;
-            margin: auto;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.281);
-        }
-        footer{
-            color: white;
-            text-align: center;
-            font-style: italic;
-        }
-        #imagem{
-            border-radius: 50%;
-            width: 500px;
-            height: 500px;
-        }
-        div{
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Hora do dia</h1>
-    </header>
-    <section>
-        <div id="msg">
-            Aqui vai aparecer a mensagem...
-        </div>
-        <div>
-            <img src="" alt="foto que muda a cada horário" id="imagem">
-        </div>
-    </section>
-    <footer>
-        <p>&copy; CursoEmVideo</p>
-    </footer>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Código inicial</title>
+  </head>
+  <body>
+    <ol id="sentry-objects"></ol>
 
     <script>
-        function carregar(){
-            let msg = document.getElementById('msg');
-            let img = document.getElementById('imagem');
-            let data = new Date();
-            let hora = data.getHours();
-            // let hora = 10;
-            msg.innerHTML = `Agora são ${hora} horas`;
-
-            if (hora>=0 && hora<= 12) {
-                //BomDia
-                img.src = './img/morning.jpg';
-                document.body.style.background = '#e2cd9f';
-            } else if (hora <18 ) {
-                //Boa tarde
-                img.src = './img/afternoon.jpg';
-                document.body.style.background = '#b9846f';
-            } else {
-                //Boa noite
-                img.src = './img/night.jpg';
-                document.body.style.background = '#515154';
-            }
+      class SentryObject {
+        constructor(id, name, yearMin, yearMax) {
+          this.id = id;
+          this.name = name;
+          this.yearMin = yearMin;
+          this.yearMax = yearMax;
         }
-        window.onload(carregar());
+      }
+
+      async function getSentryObjects() {
+        let response = await fetch("https://api.nasa.gov/neo/rest/v1/neo/sentry?api_key=DEMO_KEY");
+        let result = await response.json();
+        return result["sentry_objects"];
+      }
+
+      async function loadSentryObjects() {
+        let sentryObjects = [];
+        let sentryObjectsJSON = await getSentryObjects();
+        sentryObjectsJSON.forEach((sentry) => {
+          const newSentry = new SentryObject(
+            sentry["sentryId"],
+            sentry["fullname"],
+            sentry["year_range_min"],
+            sentry["year_range_max"]
+          );
+          sentryObjects.push(newSentry);
+        });
+        renderSentryObjects(sentryObjects);
+      }
+
+      function renderSentryObjects(sentryObjects) {
+        const olElement = document.getElementById("sentry-objects");
+        sentryObjects.forEach((sentry) => {
+          const liElement = document.createElement("li");
+          const text = `(${sentry.id}) ${sentry.name}: risco de colisão entre ${sentry.yearMin} e ${sentry.yearMax}`;
+          liElement.innerText = text;
+          olElement.appendChild(liElement);
+        });
+      }
+
+      loadSentryObjects();
     </script>
-</body>
+  </body>
 </html>

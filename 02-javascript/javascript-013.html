@@ -1,3 +1,4 @@
+<!-- Testar no chatGPT e descobrir se há algum erro nesse código -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +9,37 @@
 </head>
 <body>
     <script>
-        let amigo = {
-            nome:'José',
-            sexo:'M',
-            peso:85.4,
-            engordar(p=0){
-                console.log('Engordou!');
-                this.peso += p;
+        let laserGun = {
+            shotsPerSecond: 30,
+            currentPosition: [30, 45, 70],
+            firing: false
+        }
+
+        async function adjustPosition(x, y, z) {
+            if(z > 90) {
+                return Promise.reject("Angulo Z inválido para arma")
+            }
+            laserGun.currentPosition = [x, y, z]
+            return [x, y, z]
+        }
+
+        async function fire(x, y, z) {
+            laserGun.firing = true
+            return [x, y, z]
+        }
+
+        async function moveAndFire(x, y, z) {
+            try {
+                let newCoordinates = await adjustPosition(x, y, z)
+                console.log(`Arma ajustada para as coordenadas (${newCoordinates[0]}, ${newCoordinates[1]}, ${newCoordinates[2]})`)
+                let fireCoord = await fire(...newCoordinates)
+                console.log(`Começando a atirar nas coordenadas (${fireCoord[0]}, ${fireCoord[1]}, ${fireCoord[2]})`)
+            } catch(error) {
+                console.log(error)
             }
         }
-        amigo.engordar(5);
-        console.log(`Amigo: ${amigo.nome} | Pesa: ${amigo.peso}`);
+
+        moveAndFire(20, 40, 90)
     </script>
 </body>
 </html>
