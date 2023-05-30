@@ -15,7 +15,14 @@
         let numeroFormatado
         for(let i=1; i<=19; i++){
             numeroFormatado = i.toString().padStart(3, '0');
-            list.innerHTML += `<li><a href="./ex${numeroFormatado}.html">Código-${numeroFormatado}</a></li>`
+            list.innerHTML += `
+            <li>
+                <a href="./ex${numeroFormatado}.html">Desafio-${numeroFormatado}</a>
+            </li>
+            <li>
+                <a href="https://github.com/JoaoLuizRSilva/Estudos/blob/main/ex${numeroFormatado}.html">Código-${numeroFormatado}</a>
+            </li>
+            `
         }
     </script>
 </body>
