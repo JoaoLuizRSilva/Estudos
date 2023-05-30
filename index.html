@@ -7,34 +7,15 @@
     <title>Lista de Exercícios</title>
 </head>
 <body>
-    <h1>Lista de Exercícios</h1>
-    <ul>
-        <li>
-            HTML e CSS
-            <ul>
-                <li><a href="./01-html-css/html-css-001.html">html-css-001</a></li>
-                <li><a href="./01-html-css/html-css-002.html">html-css-002</a></li>
-                <li><a href="./01-html-css/html-css-003.html">html-css-003</a></li>
-                <li><a href="./01-html-css/html-css-004.html">html-css-004</a></li>
-                <li><a href="./01-html-css/html-css-005.html">html-css-005</a></li>
-                <li><a href="./01-html-css/html-css-006.html">html-css-006</a></li>
-                <li><a href="./01-html-css/html-css-007.html">html-css-007</a></li>
-                <li><a href="./01-html-css/html-css-008.html">html-css-008</a></li>
-            </ul>
-        </li>
-        <li>
-            Javascript
-            <ul id="list-js">
-                
-            </ul>
-        </li>
+    <ul id="list">
+
     </ul>
     <script>
-        const listJs = document.querySelector("#list-js");
+        const list = document.querySelector("#list");
         let numeroFormatado
-        for(let i=1; i<=49; i++){
+        for(let i=1; i<=19; i++){
             numeroFormatado = i.toString().padStart(3, '0');
-            listJs.innerHTML += `<li><a href="./02-javascript/javascript-${numeroFormatado}.html">javascript-${numeroFormatado}</a></li>`
+            list.innerHTML += `<li><a href="./ex${numeroFormatado}.html">Código-${numeroFormatado}</a></li>`
         }
     </script>
 </body>
