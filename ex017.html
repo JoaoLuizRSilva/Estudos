@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
 <body>
   <h1>Cadastro de imóveis</h1>
   <h2>Formulário</h2>
-  <form onsubmit="app.addProperty()">
+  <form id="propertyForm">
     <p>
       <label for="kind">Tipo: </label>
       <select name="kind" id="kind">
@@ -25,8 +25,8 @@
       <label for="rented">Alugado</label>
       <input type="checkbox" name="rented" id="rented">
     </p>
-    <button type="submit">Salvar</button>
-    <button type="button" onclick="app.cleanForm()">Limpar</button>
+    <button type="submit" id="saveButton">Salvar</button>
+    <button type="button" id="clearButton">Limpar</button>
   </form>
   <hr>
   <h2>Imóveis cadastrados</h2>
@@ -43,55 +43,71 @@
     }
 
     class App{
-      addProperty(){
-        event.preventDefault()
-        let kind = document.querySelector("select[name='kind']").value
-        let area = document.querySelector("input[name='area']").value
-        let rented = document.querySelector("input[name='rented']").checked
-        let property = new Property(kind, area, rented)
-        this.addOnPropertiesList(property)
-        this.cleanForm()
+      constructor(){
+        this.propertyForm = document.getElementById('propertyForm');
+        this.saveButton = document.getElementById('saveButton');
+        this.clearButton = document.getElementById('clearButton');
+        this.propertiesList = document.getElementById('properties');
+
+        this.saveButton.addEventListener('click', this.addProperty.bind(this));
+        this.clearButton.addEventListener('click', this.cleanForm.bind(this));
+        this.propertiesList.addEventListener('click', this.handleListClick.bind(this));
       }
+
+      addProperty(event){
+        event.preventDefault();
+        let kind = document.querySelector("select[name='kind']").value;
+        let area = document.querySelector("input[name='area']").value;
+        let rented = document.querySelector("input[name='rented']").checked;
+        let property = new Property(kind, area, rented);
+        this.addOnPropertiesList(property);
+        this.cleanForm();
+      }
+
       addOnPropertiesList(property){
-        let listElement = document.createElement("li")
-        let propertyInfo = `Tipo ${property.kind} (Área: ${property.area}m2) `
+        let listElement = document.createElement("li");
+        let propertyInfo = `Tipo ${property.kind} (Área: ${property.area}m2) `;
         if(property.rented){
-          let rentedMark = this.createRentedMark()
-          listElement.appendChild(rentedMark)
+          let rentedMark = this.createRentedMark();
+          listElement.appendChild(rentedMark);
         }
-        listElement.innerHTML += propertyInfo
-        let buttonToRemove = this.createRemoveButton()
-        listElement.appendChild(buttonToRemove)
-        document.getElementById("properties").appendChild(listElement)
+        listElement.innerHTML += propertyInfo;
+        let buttonToRemove = this.createRemoveButton();
+        listElement.appendChild(buttonToRemove);
+        this.propertiesList.appendChild(listElement);
       }
 
       createRentedMark(){
-        let rentedMark = document.createElement("span")
-        rentedMark.style.color = "white"
-        rentedMark.style.backgroundColor = "red"
-        rentedMark.innerText = "Alugado"
-        return rentedMark
+        let rentedMark = document.createElement("span");
+        rentedMark.style.color = "white";
+        rentedMark.style.backgroundColor = "red";
+        rentedMark.innerText = "Alugado";
+        return rentedMark;
       }
 
       createRemoveButton(){
-        let buttonToRemove = document.createElement("button")
-        buttonToRemove.setAttribute("onclick", "app.remove()")
-        buttonToRemove.innerText = "Remover"
-        return buttonToRemove
+        let buttonToRemove = document.createElement("button");
+        buttonToRemove.innerText = "Remover";
+        return buttonToRemove;
       }
 
       cleanForm(){
-        document.querySelector("input[name='area']").value = ""
-        document.querySelector("input[name='rented']").checked = false
+        document.querySelector("input[name='area']").value = "";
+        document.querySelector("input[name='rented']").checked = false;
       }
 
-      remove(){
-        let liToRemove = event.target.parentNode
-        document.getElementById("properties").removeChild(liToRemove)
+      handleListClick(event){
+        if (event.target.tagName === 'BUTTON') {
+          this.remove(event.target.parentNode);
+        }
+      }
+
+      remove(element){
+        this.propertiesList.removeChild(element);
       }
     }
 
-    const app = new App()
+    const app = new App();
   </script>
 </body>
 </html>
