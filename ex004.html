@@ -1,50 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Tabela com estilo</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-			max-width: 600px;
-			margin: auto;
-		}
-		th, td {
-			border: 1px solid black;
-			padding: 10px;
-			text-align: center;
-		}
-		th {
-			background-color: #f2f2f2;
-		}
-	</style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo de JavaScript</title>
+  <style>
+    #style-text {
+      padding: 20px;
+      font-size: 20px;
+    }
+
+    .red-color {
+      color: red;
+    }
+  </style>
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Idade</th>
-				<th>Cidade</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>João</td>
-				<td>30</td>
-				<td>São Paulo</td>
-			</tr>
-			<tr>
-				<td>Maria</td>
-				<td>25</td>
-				<td>Rio de Janeiro</td>
-			</tr>
-			<tr>
-				<td>Carlos</td>
-				<td>40</td>
-				<td>Belo Horizonte</td>
-			</tr>
-		</tbody>
-	</table>
+  <h1 id="style-text">JavaScript é incrível!</h1>
+
+  <button onclick="fundoAzul()">Fundo Azul</button>
+  <button onclick="fundoTransparente()">Fundo Transparente</button>
+  <button onclick="corVermelha()">Cor Vermelha</button>
+  <button onclick="removerCorVermelha()">Remover Cor Vermelha</button>
+
+  <script>
+    function fundoAzul() {
+      let element = document.querySelector('#style-text');
+      element.style.backgroundColor = 'blue';
+    }
+
+    function fundoTransparente() {
+      let element = document.querySelector('#style-text');
+      element.style.backgroundColor = 'transparent';
+    }
+
+    function corVermelha() {
+      let element = document.querySelector('#style-text');
+      element.classList.add("red-color");
+    }
+
+    function removerCorVermelha() {
+      let element = document.querySelector('#style-text');
+      element.classList.remove("red-color");
+    }
+  </script>
 </body>
 </html>

@@ -1,37 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <title>Huracán</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo de Site</title>
+    <style>
+        body{
+            background-color: #3b88b4;
+        }
+        header{
+            color: white;
+            text-align: center;
+        }
+        section{
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.281);
+        }
+        footer{
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+        select#flista{
+            width: 150px;
+        }
+    </style>
 </head>
 <body>
-    <a href="#header">Cabeçalho</a>
-    <a href="#description">Descrição</a>
-    <div id="header">
-        <h1>Lamborghini Huracán</h1>
-        <figure>
-            <img src="./img/lambo-branca.png" alt="Lambo Branca">
-            <figcaption><em>Muito mais que um carro</em></figcaption>
-        </figure>
-        <h2>O que é?</h2>
-        <p>O Lamborghini Huracán é um automóvel desportivo construído pela empresa italiana Lamborghini, substituindo o lendário Gallardo, uns dos carros mais bem sucedidos da história da companhia. Como é tradição na marca Lamborghini, o nome Huracán surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla.</p>
-    </div>
-    <h2>Diferenciais</h2>
-    <p><em>Diferente de tudo o que você já viu</em></p>
-    <ul>
-        <li>Motor V10 5.2L (5204 cc)</li>
-        <li>Torque 6500 rpm</li>
-        <li>Chassi de fibra de carbono forjado</li>
-        <li>3 modos: Strada, Spot e Corsa</li>
-        <li>0 a 100 km/h em 3.2 segundos</li>
-        <li>0 a 200 km/h em 9.5 segundos</li>
-    </ul>
-    <div id="description">
-        <h2>Decrição</h2>
-        <figure>
-            <img src="./img/lambo-verde.png" alt="lambo verde">
-        </figure>
-        <p>O Huracán utiliza o mesmo bloco do motor do anterior Gallardo, um 5,2 litros V10. As alterações introduzidas permitiram aumentar a potência dos 520 cv do Gallardo LP-520-4 para 610 cv. O Huracan acelera dos 0 a 100 km/h em apenas 3,2 segundos e alcança a marca de 200 km/h em 9,5 segundos.</p>
-        <p>É possível conduzir o carro em três modos, são eles: Strada, Sport e Corsa que modificam o comportamento do carro. A caixa de sete velocidades é automatizada de uma única embreagem.</p>
-    </div>
+    <header>
+        <h1></h1>
+    </header>
+    <section>
+        <div>
+            Número (entre 1 e 100):
+            <input type="number" name="fnum" id="fnum">
+            <input type="button" value="Adicionar" id="adicionar">
+            <br>
+            <select name="flista" id="flista" size="6">
+
+            </select>
+            <br>
+            <input type="button" value="Finalizar" id="finalizar">
+        </div>
+        <div id="resultado">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; CursoEmVideo</p>
+    </footer>
+
+
+
+    <script>
+        let botaoAdicionar = document.querySelector('#adicionar');
+        let botaoFinalizar = document.querySelector('#finalizar');
+        let num = document.querySelector('#fnum');
+        let lista = document.querySelector('#flista');
+        let resultado = document.querySelector('#resultado');
+        let valores = [];
+
+        botaoAdicionar.addEventListener('click', adicionar);
+        botaoFinalizar.addEventListener('click', finalizar);
+
+        function isNumero(n){
+            if(Number(n)>=1 && Number(n)<=100){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function inLista(n, lista){
+            if (lista.indexOf(Number(n)) != -1){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function adicionar() {
+            if(isNumero(num.value) && !inLista(num.value, valores)) {
+                valores.push(Number(num.value));
+                let item = document.createElement('option');
+                item.text = `Valor ${num.value} adicionado`;
+                lista.appendChild(item)
+            } else {
+                alert('Valor inválido ou já encontrado na lista.');
+            }
+            num.value = '';
+            num.focus();
+        }
+
+        function finalizar(){
+            if(valores.length == 0){
+                alert('Adicione valores antes de finalizar');
+            } else {
+                let total = valores.length;
+
+                let maior = valores[0];
+                let menor = valores[0];
+
+                let soma = 0;
+                let media = 0;
+
+                for(let posicao in valores) {
+                    soma += valores[posicao];
+
+                    if(valores[posicao] > maior) {
+                        maior = valores[posicao]
+                    }
+
+                    if(valores[posicao] < menor) {
+                        menor = valores[posicao]
+                    }
+                }
+
+                media = soma / total;
+
+                resultado.innerHTML = '';
+                resultado.innerHTML += `<p>Total de valores digitados: ${total}</p>`;
+                resultado.innerHTML +=`<p>Maior valor: ${maior}</p>`;
+                resultado.innerHTML += `<p>Menor valor: ${menor}</p>`;
+                resultado.innerHTML += `<p>Soma dos valores: ${soma}</p>`;
+                resultado.innerHTML += `<p>Média dos valores: ${media}</p>`;
+
+            }
+        }
+    </script>
 </body>
 </html>

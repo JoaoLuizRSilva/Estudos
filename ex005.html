@@ -1,65 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Cadastro da liga dos astronautas</title>
-  </head>
-  <body>
-    <h3>Cadastro da liga dos astronautas</h3>
-    <form action="" method="POST">
-      <div>
-        <label for="name">Nome:</label>
-        <input type="text" id="name" name="name">
-      </div>
-      <br>
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email"> - 
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password">
-      </div>
-      <br>
-      <div>
-        <label for="birthday">Data de nascimento:</label>
-        <input type="date" name="birthday" id="birthday"> - 
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Cadastro de imóveis</h1>
+  <h2>Formulário</h2>
+  <form id="propertyForm">
+    <p>
+      <label for="kind">Tipo: </label>
+      <select name="kind" id="kind">
+        <option value="Apartamento">Apartamento</option>
+        <option value="Casa">Casa</option>
+      </select>
+    </p>
+    <p>
+      <label for="area">Área: </label>
+      <input type="number" name="area" id="area">
+    </p>
+    <p>
+      <label for="rented">Alugado</label>
+      <input type="checkbox" name="rented" id="rented">
+    </p>
+    <button type="submit" id="saveButton">Salvar</button>
+    <button type="button" id="clearButton">Limpar</button>
+  </form>
+  <hr>
+  <h2>Imóveis cadastrados</h2>
+  <ul id="properties">
 
-        <label for="photo">Foto:</label>
-        <input type="file" name="photo" id="photo">
-      </div>
-      <br>
-      <div>
-        <label for="nationality">Nacionalidade:</label>
-        <select name="nationality" id="nationality">
-          <option value="russian">Russa</option>
-          <option value="american">Americana</option>
-          <option value="brasilian">Brasileira</option>
-        </select> - 
+  </ul>
+  <script>
+    class Property{
+      constructor(kind, area, rented){
+        this.kind = kind
+        this.area = area
+        this.rented = rented
+      }
+    }
 
-        Genero:
-        <label for="female">F</label>
-        <input type="radio" name="gender" id="female" value="female">
-        <label for="male">M</label>
-        <input type="radio" name="gender" id="male" value="male">
-      </div>
-      <br>
-      <div>
-        Suas principais qualidades:<br>
-        <label for="int">Inteligência</label>
-        <input type="checkbox" name="int" id="int"> | 
-        <label for="res">Resiliência</label>
-        <input type="checkbox" name="res" id="res"> | 
-        <label for="physic">Preparo físico</label>
-        <input type="checkbox" name="physic" id="physic"> | 
-        <label for="edu">Educação</label>
-        <input type="checkbox" name="edu" id="edu">
-      </div>
-      <br>
-      <div>
-        <textarea name="description" id="description" cols="30" rows="10" placeholder="Porque você gostaria de ser astronauta?"></textarea>
-      </div>
-      <br>
-      <div>
-        <input type="submit" value="Criar">
-      </div>
-    </form>
-  </body>
+    class App{
+      constructor(){
+        this.propertyForm = document.getElementById('propertyForm');
+        this.saveButton = document.getElementById('saveButton');
+        this.clearButton = document.getElementById('clearButton');
+        this.propertiesList = document.getElementById('properties');
+
+        this.saveButton.addEventListener('click', this.addProperty.bind(this));
+        this.clearButton.addEventListener('click', this.cleanForm.bind(this));
+        this.propertiesList.addEventListener('click', this.handleListClick.bind(this));
+      }
+
+      addProperty(event){
+        event.preventDefault();
+        let kind = document.querySelector("select[name='kind']").value;
+        let area = document.querySelector("input[name='area']").value;
+        let rented = document.querySelector("input[name='rented']").checked;
+        let property = new Property(kind, area, rented);
+        this.addOnPropertiesList(property);
+        this.cleanForm();
+      }
+
+      addOnPropertiesList(property){
+        let listElement = document.createElement("li");
+        let propertyInfo = `Tipo ${property.kind} (Área: ${property.area}m2) `;
+        if(property.rented){
+          let rentedMark = this.createRentedMark();
+          listElement.appendChild(rentedMark);
+        }
+        listElement.innerHTML += propertyInfo;
+        let buttonToRemove = this.createRemoveButton();
+        listElement.appendChild(buttonToRemove);
+        this.propertiesList.appendChild(listElement);
+      }
+
+      createRentedMark(){
+        let rentedMark = document.createElement("span");
+        rentedMark.style.color = "white";
+        rentedMark.style.backgroundColor = "red";
+        rentedMark.innerText = "Alugado";
+        return rentedMark;
+      }
+
+      createRemoveButton(){
+        let buttonToRemove = document.createElement("button");
+        buttonToRemove.innerText = "Remover";
+        return buttonToRemove;
+      }
+
+      cleanForm(){
+        document.querySelector("input[name='area']").value = "";
+        document.querySelector("input[name='rented']").checked = false;
+      }
+
+      handleListClick(event){
+        if (event.target.tagName === 'BUTTON') {
+          this.remove(event.target.parentNode);
+        }
+      }
+
+      remove(element){
+        this.propertiesList.removeChild(element);
+      }
+    }
+
+    const app = new App();
+  </script>
+</body>
 </html>

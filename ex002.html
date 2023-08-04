@@ -4,124 +4,107 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/ico.png" type="image/png">
-    <title>Workshop</title>
+    <title>Document</title>
     <style>
         *{
-            padding: 0px;
-            border: 0px;
-            margin: 0px;
             font-family: Arial, Helvetica, sans-serif;
         }
         body{
-            background-color: black;
-        }
-        .container{
-            max-width: 1000px;
-            margin: auto;
+            background-color: #3b88b4;
         }
         header{
-            background-color: #48c5ce;
             color: white;
             text-align: center;
-            padding: 10px;
-        }
-        .title{
-            font-size: 26px;
         }
         section{
-            padding: 20px;
-            background-image: url('./img/people.jpg');
-            background-size: cover;
-            overflow: hidden;
-        }
-        .fromContainer{
-            max-width: 300px;
-            background-color: #ffffffbb;
-            padding: 30px;
-            float: right;
-            border-radius: 20px 0px;
-        }
-        h2{
-            font-size: 24px;
-        }
-        .mb{
-            margin-bottom: 15px;
-        }
-        input, select{
-            width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            border: none;
-            margin-bottom: 10px;
-        }
-        input[type="submit"]{
-            background-color: #48c5ce;
-            color: white;
-            font-weight: bold;
-        }
-        select{
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            appearance: none;
-
-            background-image: url('./img/arrow.jpg');
-            background-repeat: no-repeat;
-
-            background-position-x: calc(100% - 10px);
-            background-position-y: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.281);
         }
         footer{
-            background-color: #202121;
-            padding: 40px;
-            text-align: center;
-        }
-        .picture{
-            width: 160px;
-        }
-        .description{
             color: white;
-            display: inline-block;
-            max-width: 40%;
-            margin-left: 40px;
-            text-align: left;
-            vertical-align: top;
+            text-align: center;
+            font-style: italic;
         }
-        .description h2, .description p{
-            margin-bottom: 20px;
+        #imagem{
+            border-radius: 50%;
+            width: 500px;
+            height: 500px;
+        }
+        div{
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 class="title">Participe do Workshop que vai mudar seu negócio</h1>
-        </header>
-        <section>
-            <div class="fromContainer">
-                <h2 class="mb">GARANTA SEU LUGAR NO WORKSHOP DO MAIOR ESPECIALISTA EM MARKETING DA ATUALIDADE</h2>
-                <P class="mb">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat voluptatem eaque in velit nemo libero voluptates aliquam, cupiditate, eius itaque magnam similique dolores molestiae, assumenda quia! Animi ipsum temporibus necessitatibus.</P>
-                <form method="post" action="">
-                    <input id="name" name="name" type="text" placeholder="Seu Nome">
-                    <input id="email" name="email" type="text" placeholder="Email">
-                    <select name="place">
-                        <option value="rj">Rio de Janeiro</option>
-                        <option value="mg">Minas Gerais</option>
-                        <option value="es">Espírito Santo</option>
-                        <option value="sp">São Paulo</option>
-                    </select>
-                    <input type="submit" value="Increva-se">
-                </form>
-            </div>
-        </section>
-        <footer>
-            <img src="./img/face.jpg" alt="foto-palestrante" class="picture">
-            <div class="description">
-                <h2>O palestrante</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui cum aspernatur asperiores distinctio quia sapiente sit libero dicta eligendi illum omnis, ipsa minima quasi nulla eveniet ipsam cupiditate tenetur blanditiis!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quod quasi, voluptas in adipisci nostrum, facilis, autem eos porro dicta facere aut necessitatibus totam dolore. Quidem consequuntur veritatis quae voluptatum!</p>
-            </div>
-        </footer>
-    </div>
+    <header>
+        <h1>Verificador de idade</h1>
+    </header>
+    <section>
+        <div>
+            <p>
+                Ano de nascimento:
+                <input type="number" name="nascimento" id="nascimento">
+            </p>
+            <p>
+                Sexo:
+                <input type="radio" name="inputSex" id="masc" checked>
+                <label for="masc">Masculino</label>
+                <input type="radio" name="inputSex" id="fem">
+                <label for="fem">Feminino</label>
+            </p>
+            <input type="button" value="Verificar" id="ver">
+        </div>
+        <div id="resultado">
+            <p>Preencha os campos para ver o resultado</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; CursoEmVideo</p>
+    </footer>
+    <script>
+        let botao = document.querySelector('#ver');
+        let resultado = document.querySelector('#resultado');
+        botao.addEventListener('click', verificar);
+
+        function carregarImagem(idade, genero){
+            let imagem = document.createElement('img');
+            if(idade<=12){
+                imagem.setAttribute('src', `./img/crianca-${genero}.jpg`);
+            } else if(idade<=21){
+                imagem.setAttribute('src', `./img/jovem-${genero}.jpg`);
+            } else if(idade<=60){
+                imagem.setAttribute('src', `./img/adulto-${genero}.jpg`);
+            } else{
+                imagem.setAttribute('src', `./img/velho-${genero}.jpg`);
+            }
+            resultado.appendChild(imagem);
+        }
+
+        function verificar(){
+            let inputNascimento = document.querySelector('#nascimento');
+            let data = new Date();
+            let anoAtual = data.getFullYear();
+            if(inputNascimento.value.length==0 || inputNascimento.value>anoAtual){
+                alert('[Erro] Verifique os dados e tente novamente');
+                inputNascimento.value = '';
+                inputNascimento.focus();
+            } else{
+                let idade = anoAtual - inputNascimento.value;
+                let campoGenero = document.getElementsByName('inputSex');
+                let genero = '';
+                if(campoGenero[0].checked){
+                    genero = 'homem';
+                } else{
+                    genero = 'mulher';
+                }
+                resultado.innerHTML = `<p>${genero.toUpperCase()} com ${idade} anos de idade.</p>`;
+                carregarImagem(idade, genero);
+            }
+        }
+    </script>
 </body>
 </html>
