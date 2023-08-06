@@ -13,13 +13,12 @@
     <script>
         const list = document.querySelector("#list");
         let numeroFormatado
-        for(let i=1; i<=6; i++){
+        for(let i=1; i<=14; i++){
             numeroFormatado = i.toString().padStart(3, '0');
             list.innerHTML += `
             <li>
                 <a href="./ex${numeroFormatado}.html">Desafio-${numeroFormatado}</a>
-            </li>
-            <li>
+                <br>
                 <a href="https://github.com/JoaoLuizRSilva/Estudos/blob/main/ex${numeroFormatado}.html">Código-${numeroFormatado}</a>
             </li>
             `

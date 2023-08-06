@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaceships</title>
+</head>
+
+<body>
+  <div id="output"></div>
+  <script>
+    class Spaceship {
+      constructor(name, maxCapacity, currentCharge, shield) {
+        this.name = name
+        this.maxCapacity = maxCapacity
+        this.currentCharge = currentCharge
+        this.shield = shield
+      }
+
+      currentPercentCharge() {
+        return this.currentCharge * 100 / this.maxCapacity
+      }
+    }
+
+    class SpaceshipEngine {
+      constructor(spaceship) {
+        this.spaceship = spaceship
+      }
+
+      async turnOn() {
+        try {
+          let currentChargeChecking = this.checkCurrentCharge()
+          let shieldChecking = this.testShield()
+          let results = await Promise.all([currentChargeChecking, shieldChecking])
+          this.spaceship.shield = await this.shieldNormalizer(results[1])
+          this.logMessage(`(${this.spaceship.name}) Partida autorizada: Escudo (${this.spaceship.shield}) - Carga(${this.spaceship.currentCharge}GJ)`)
+        } catch (error) {
+          this.logMessage(`(${this.spaceship.name}) Partida não autorizada: ${error}`)
+        }
+      }
+
+      async checkCurrentCharge() {
+        let currentCharge = this.spaceship.currentPercentCharge()
+        if (currentCharge < 30) {
+          return Promise.reject(`Carga em apenas ${currentCharge}GJ`)
+        }
+        return currentCharge
+      }
+
+      async testShield() {
+        let doubledShield = this.spaceship.shield * 2
+        if (doubledShield < 100) {
+          return Promise.reject("Escudo em sobrecarga")
+        }
+        return doubledShield
+      }
+
+      async shieldNormalizer(shield) {
+        let normalizedShield = shield * 0.7
+        if (normalizedShield > 120) {
+          return Promise.reject("Escudo em supercarga")
+        }
+        return normalizedShield
+      }
+
+      logMessage(message) {
+        const outputDiv = document.getElementById('output')
+        const messageElement = document.createElement('p')
+        messageElement.textContent = message
+        outputDiv.appendChild(messageElement)
+      }
+    }
+
+    const sophia = new Spaceship("Sophia", 10, 5, 70)
+    const amsterda = new Spaceship("Amsterdã", 14, 10, 40)
+    const dwarfStart = new Spaceship("Estrela-Anã", 20, 4, 80)
+
+    const sophiaEngine = new SpaceshipEngine(sophia)
+    const amsterdaEngine = new SpaceshipEngine(amsterda)
+    const dwarfStartEngine = new SpaceshipEngine(dwarfStart)
+
+    sophiaEngine.turnOn()
+    amsterdaEngine.turnOn()
+    dwarfStartEngine.turnOn()
+
+    console.log("Promises")
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Spaceship Control</title>
+</head>
+
+<body>
+  <h1>Spaceship Control Panel</h1>
+
+  <div>
+    <h2>Sophia</h2>
+    <label for="sophiaCharge">Current Charge (GJ): </label>
+    <input type="number" id="sophiaCharge" value="5">
+    <label for="sophiaShield">Shield Status: </label>
+    <input type="number" id="sophiaShield" value="70">
+    <button onclick="turnOnSophia()">Turn On</button>
+    <p id="sophiaResult"></p>
+  </div>
+
+  <div>
+    <h2>Amsterdã</h2>
+    <label for="amsterdaCharge">Current Charge (GJ): </label>
+    <input type="number" id="amsterdaCharge" value="10">
+    <label for="amsterdaShield">Shield Status: </label>
+    <input type="number" id="amsterdaShield" value="40">
+    <button onclick="turnOnAmsterda()">Turn On</button>
+    <p id="amsterdaResult"></p>
+  </div>
+
+  <div>
+    <h2>Estrela-Anã</h2>
+    <label for="dwarfStartCharge">Current Charge (GJ): </label>
+    <input type="number" id="dwarfStartCharge" value="4">
+    <label for="dwarfStartShield">Shield Status: </label>
+    <input type="number" id="dwarfStartShield" value="80">
+    <button onclick="turnOnDwarfStart()">Turn On</button>
+    <p id="dwarfStartResult"></p>
+  </div>
+
+  <script>
+    // Adaptação do código de Spaceship
+    class Spaceship {
+      constructor(name, maxCapacity, currentCharge, shield) {
+        this.name = name
+        this.maxCapacity = maxCapacity
+        this.currentCharge = currentCharge
+        this.shield = shield
+      }
+
+      currentPercentCharge() {
+        return this.currentCharge * 100 / this.maxCapacity
+      }
+    }
+
+    // Adaptação do código de SpaceshipEngine
+    class SpaceshipEngine {
+      constructor(spaceship) {
+        this.spaceship = spaceship
+      }
+
+      turnOn() {
+        let currentChargeChecking = this.checkCurrentCharge()
+        let shieldChecking = this.testShield()
+        Promise.all([currentChargeChecking, shieldChecking]).then(results => {
+          return this.shieldNormalizer(results[1])
+        }).then(newShield => {
+          this.spaceship.shield = newShield
+          document.getElementById(this.spaceship.name.toLowerCase() + "Result").innerText = `(${this.spaceship.name}) Partida autorizada: Escudo (${this.spaceship.shield}) - Carga(${this.spaceship.currentCharge}GJ)`
+        }).catch(error => {
+          document.getElementById(this.spaceship.name.toLowerCase() + "Result").innerText = `(${this.spaceship.name}) Partida não autorizada: ${error}`
+        })
+      }
+
+      checkCurrentCharge() {
+        return new Promise((resolve, reject) => {
+          let currentCharge = this.spaceship.currentPercentCharge()
+          if (currentCharge >= 30) {
+            resolve(currentCharge)
+          } else {
+            reject(`Carga em apenas ${currentCharge}GJ`)
+          }
+        })
+      }
+
+      testShield() {
+        return new Promise((resolve, reject) => {
+          let doubledShield = this.spaceship.shield * 2
+          if (doubledShield >= 100) {
+            resolve(doubledShield)
+          } else {
+            reject("Escudo em sobrecarga")
+          }
+        })
+      }
+
+      shieldNormalizer(shield) {
+        return new Promise((resolve, reject) => {
+          let normalizedShield = shield * 0.7
+          if (normalizedShield > 120) {
+            reject("Escudo em supercarga")
+          } else {
+            resolve(normalizedShield)
+          }
+        })
+      }
+    }
+
+    // Funções para interagir com as naves
+    function turnOnSophia() {
+      const charge = parseInt(document.getElementById("sophiaCharge").value)
+      const shield = parseInt(document.getElementById("sophiaShield").value)
+      const sophia = new Spaceship("Sophia", 10, charge, shield)
+      const sophiaEngine = new SpaceshipEngine(sophia)
+      sophiaEngine.turnOn()
+    }
+
+    function turnOnAmsterda() {
+      const charge = parseInt(document.getElementById("amsterdaCharge").value)
+      const shield = parseInt(document.getElementById("amsterdaShield").value)
+      const amsterda = new Spaceship("Amsterdã", 14, charge, shield)
+      const amsterdaEngine = new SpaceshipEngine(amsterda)
+      amsterdaEngine.turnOn()
+    }
+
+    function turnOnDwarfStart() {
+      const charge = parseInt(document.getElementById("dwarfStartCharge").value)
+      const shield = parseInt(document.getElementById("dwarfStartShield").value)
+      const dwarfStart = new Spaceship("Estrela-Anã", 20, charge, shield)
+      const dwarfStartEngine = new SpaceshipEngine(dwarfStart)
+      dwarfStartEngine.turnOn()
+    }
+  </script>
+</body>
+
+</html>
